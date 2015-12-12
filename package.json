@@ -8,7 +8,7 @@
   },
   "scripts": {
     "cache-clean": "rm -rf ~/.electron && rm -rf dist",
-    "postinstall": "node install.js",
+    "postinstall": "ELECTRON_MIRROR=http://brave.github.io/browser-electron-releases/ node install.js",
     "pretest": "npm run cache-clean && node install.js",
     "test": "standard && tape test/*.js"
   },
