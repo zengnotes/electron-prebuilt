@@ -35,7 +35,7 @@ if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[pla
 }
 
 // downloads if not cached
-download({version: version, arch: process.env.npm_config_arch}, extractFile)
+download({version: version, arch: process.env.npm_config_arch, mirror: 'http://brave.github.io/browser-electron-releases/'}, extractFile)
 
 // unzips and makes path.txt point at the correct executable
 function extractFile (err, zipPath) {
