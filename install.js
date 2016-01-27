@@ -23,9 +23,9 @@ function onerror (err) {
 }
 
 var paths = {
-  darwin: 'dist/Electron.app/Contents/MacOS/Electron',
-  linux: 'dist/electron',
-  win32: 'dist/electron.exe'
+  darwin: 'dist/Brave.app/Contents/MacOS/Brave',
+  linux: 'dist/brave',
+  win32: 'dist/brave.exe'
 }
 
 if (!paths[platform]) throw new Error('Unknown platform: ' + platform)
