@@ -1,13 +1,20 @@
 #!/usr/bin/env node
-
-// maintainer note - x.y.z-ab version in package.json -> x.y.z
-var version = require('./package').version.replace(/-.*/, '')
-
 var fs = require('fs')
 var os = require('os')
 var path = require('path')
 var extract = require('extract-zip')
 var download = require('electron-download')
+
+var version = process.env.ELECTRON_VERSION ||
+  process.env.npm_config_electron_version
+
+if (!version) throw new Error('must specify version')
+
+var productName = process.env.ELECTRON_PRODUCT_NAME ||
+    process.env.npm_config_electron_product_name ||
+    'Electron'
+
+var platform = os.platform()
 
 var installedVersion = null
 try {
@@ -16,27 +23,23 @@ try {
   // do nothing
 }
 
-var platform = os.platform()
-
 function onerror (err) {
   throw err
 }
 
 var paths = {
-  darwin: 'dist/Electron.app/Contents/MacOS/Electron',
-  freebsd: 'dist/electron',
-  linux: 'dist/electron',
-  win32: 'dist/electron.exe'
+  darwin: 'dist/' + productName + '.app/Contents/MacOS/' + productName,
+  freebsd: 'dist' + productName.toLowerCase(),
+  linux: 'dist/' + productName.toLowerCase(),
+  win32: 'dist/' + productName.toLowerCase() + '.exe'
 }
-
-if (!paths[platform]) throw new Error('Unknown platform: ' + platform)
 
 if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[platform]))) {
   process.exit(0)
 }
 
 // downloads if not cached
-download({version: version, platform: process.env.npm_config_platform, arch: process.env.npm_config_arch, strictSSL: process.env.npm_config_strict_ssl === 'true'}, extractFile)
+download({version, platform}, extractFile)
 
 // unzips and makes path.txt point at the correct executable
 function extractFile (err, zipPath) {
