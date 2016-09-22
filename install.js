@@ -35,10 +35,10 @@ if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[pla
 }
 
 let arch = process.env.npm_config_arch
-let filename = `brave-v${version}-${platform}-${arch}.zip`
+let customFilename = `brave-v${version}-${platform}-${arch}.zip`
 
 // downloads if not cached
-download({version: version, arch: process.env.npm_config_arch, filename}, extractFile)
+download({version: version, arch: process.env.npm_config_arch, customFilename}, extractFile)
 
 // unzips and makes path.txt point at the correct executable
 function extractFile (err, zipPath) {
