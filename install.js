@@ -34,7 +34,7 @@ if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[pla
   process.exit(0)
 }
 
-let arch = process.env.npm_config_arch
+let arch = process.env.npm_config_arch || os.arch()
 let customFilename = `brave-v${version}-${platform}-${arch}.zip`
 
 // downloads if not cached
