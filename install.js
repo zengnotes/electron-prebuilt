@@ -30,7 +30,7 @@ var paths = {
 
 if (!paths[platform]) throw new Error('Unknown platform: ' + platform)
 console.log(process.env.npm_config_brave_electron_version)
-console.log(require('./package').version).replace(/-.*/, '')))
+console.log(require('./package').version)
 console.log(version)
 console.log(installedVersion)
 if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[platform]))) {
