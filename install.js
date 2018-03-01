@@ -34,7 +34,7 @@ console.log(installedVersion)
 if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[platform]))) {
   process.exit(0)
 }
-
+exit(0)
 // downloads if not cached
 download({version: version, arch: process.env.npm_config_arch, mirror: 'https://github.com/brave/electron/releases/download/v'}, extractFile)
 
