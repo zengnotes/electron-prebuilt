@@ -29,12 +29,14 @@ var paths = {
 }
 
 if (!paths[platform]) throw new Error('Unknown platform: ' + platform)
+console.log(process.env.npm_config_brave_electron_version)
+console.log(require('./package').version).replace(/-.*/, ''))
 console.log(version)
 console.log(installedVersion)
 if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[platform]))) {
   process.exit(0)
 }
-exit(0)
+process.exit(0)
 // downloads if not cached
 download({version: version, arch: process.env.npm_config_arch, mirror: 'https://github.com/brave/electron/releases/download/v'}, extractFile)
 
