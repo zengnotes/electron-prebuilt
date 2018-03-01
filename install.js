@@ -29,7 +29,8 @@ var paths = {
 }
 
 if (!paths[platform]) throw new Error('Unknown platform: ' + platform)
-
+console.log(version)
+console.log(installedVersion)
 if (installedVersion === version && fs.existsSync(path.join(__dirname, paths[platform]))) {
   process.exit(0)
 }
